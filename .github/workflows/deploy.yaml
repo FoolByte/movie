@@ -1,0 +1,30 @@
+name: Deploy to GitHub Pages # Menamai workflow ini sebagai "Deploy to GitHub Pages"
+
+on:
+  push:
+    branches:
+      - main # Workflow ini dijalankan setiap kali ada perubahan di branch "main"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # Menentukan runner OS yang akan digunakan, di sini adalah Ubuntu versi terbaru
+
+    steps:
+      - name: Checkout code # Menamai langkah pertama sebagai "Checkout code"
+        uses: actions/checkout@v3 # Menggunakan GitHub Action "checkout" untuk mengambil kode dari repositori
+
+      - name: Set up Node.js # Menamai langkah untuk menyiapkan lingkungan Node.js
+        uses: actions/setup-node@v3 # Menggunakan GitHub Action "setup-node" untuk menginstal Node.js
+        with:
+          node-version: '18' # Menentukan versi Node.js yang akan digunakan (misalnya versi 18)
+
+      - name: Install dependencies # Menamai langkah untuk menginstal semua dependensi proyek
+        run: npm install # Menjalankan perintah "npm install" untuk menginstal semua package yang diperlukan
+
+      - name: Build project # Menamai langkah untuk membangun proyek
+        run: npm run build # Menjalankan perintah "npm run build" untuk membuat versi build dari proyek
+
+      - name: Deploy to GitHub Pages # Menamai langkah untuk melakukan deployment ke GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3 # Menggunakan GitHub Action khusus untuk deployment ke GitHub Pages
+        with:
+          publish_dir: ./dist # Menentukan folder yang akan dipublish, dalam kasus ini "dist" sebagai folder hasil build
