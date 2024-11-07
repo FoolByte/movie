@@ -27,4 +27,5 @@ jobs:
       - name: Deploy to GitHub Pages # Menamai langkah untuk melakukan deployment ke GitHub Pages
         uses: peaceiris/actions-gh-pages@v3 # Menggunakan GitHub Action khusus untuk deployment ke GitHub Pages
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Menyediakan token GitHub agar memiliki izin mengakses repositori
           publish_dir: ./dist # Menentukan folder yang akan dipublish, dalam kasus ini "dist" sebagai folder hasil build
